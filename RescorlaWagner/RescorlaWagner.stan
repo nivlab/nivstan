@@ -39,7 +39,7 @@ transformed parameters {
 
     for (i in 1:N) {
         beta[i] = Phi_approx(mu_pr[1] + sigma[1] * beta_pr[i]) * 20;
-        eta[i] = Phi_approx(mu_pr[2] + sigma[2] * eta_u_pr[i]);
+        eta[i] = Phi_approx(mu_pr[2] + sigma[2] * eta_pr[i]);
     }
 
 }
