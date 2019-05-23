@@ -136,12 +136,12 @@ model {
         // Gamble 1: value / probability
         vector[k] u1 = risk_sensitivity_neg( Xn[i,1,:k], alpha[sub_ix[i]], 1 );
         vector[k] u2 = risk_sensitivity_neg( Xn[i,2,:k], alpha[sub_ix[i]], 1 );
-        vector[k] w1 = probability_weights( Pn[i,1,:k], gamma[i], delta_n[i] );
+        vector[k] w1 = probability_weights( Pn[i,1,:k], gamma[sub_ix[i]], delta_n[i] );
         
         // Gamble 2: value / probability
         vector[k] u3 = risk_sensitivity_neg( Xn[i,3,:k], alpha[sub_ix[i]], 1 );
         vector[k] u4 = risk_sensitivity_neg( Xn[i,4,:k], alpha[sub_ix[i]], 1 );
-        vector[k] w2 = probability_weights( Pn[i,2,:k], gamma[i], delta_n[i] );
+        vector[k] w2 = probability_weights( Pn[i,2,:k], gamma[sub_ix[i]], delta_n[i] );
         
         // Compute difference in expected value
         vector[k] dEV;
