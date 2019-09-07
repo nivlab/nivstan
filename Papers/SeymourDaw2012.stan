@@ -112,10 +112,10 @@ model {
 generated quantities { 
 
     // Reconstruct correlation matrix
-    corr_matrix[3]  R = R_cholesky * R_cholesky';
+    corr_matrix[3]  R_omega = R_cholesky * R_cholesky';
     
     // Compute log-likelihood
-    vector[N]  log_lik = rep_array(0, N);
+    vector[N]  log_lik = rep_vector(0, N);
     
     for (n in 1:N) {
     
