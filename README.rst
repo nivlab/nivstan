@@ -11,5 +11,5 @@ Resources
 - `Stan example models: <https://github.com/stan-dev/example-models>`_ a veritable treasure trove of prewritten Stan models across a wide array of statistical problems.
 - `ShinyStan: <http://mc-stan.org/users/interfaces/shinystan>`_ helpful visualization tools compatible with RStan.
 - `ArviZ: <https://github.com/arviz-devs/arviz>`_ helpful visualization tools compatible with PyStan.
-- `hBayesDM: <https://github.com/arviz-devs/arviz>`_ user-friendly R package that offers hierarchical Bayesian analysis of various computational cognitive models for many decision-making tasks.
+- `hBayesDM: <https://github.com/CCS-Lab/hBayesDM>`_ user-friendly R package that offers hierarchical Bayesian analysis of various computational cognitive models for many decision-making tasks.
 - `stantools: <https://github.com/szorowi1/stantools>`_ some custom pystan-related functions I found myself writing over and over again collected in one repository.
