@@ -1,0 +1,9 @@
+[-1] install (but that's a different section)
+---------------------------------------------
+[0] basic mcmc example
+[1] syntax: model blocks, sampling statements, variable declaration, commenting (already exists in google doc)
+[1.1] compilation errors: bad maths,
+[2] compiling / running a stan model: organizing data, specifying in dictionary, compiling StanModel, passing to StanModel, sampling, extracting and saving outputs [possible regression example]
+[2.1] passing data errors (passing reals instead of ints or vice versa)
+[3] debugging / diagnostics: good as is, link out to whatever
+[4] parameterization tricks: non-centered parameterizations, parameter transformations
