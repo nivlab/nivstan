@@ -28,7 +28,8 @@ description: >- # this means to ignore newlines until "baseurl:"
 github_username:  nivlab
 
 # Build settings
-theme: "just-the-docs"
+#theme: "just-the-docs"
+remote_theme: pmarsceill/just-the-docs
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
