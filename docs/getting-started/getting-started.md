@@ -4,6 +4,7 @@ title: Getting started
 nav_order: 3
 has_children: false
 permalink: /docs/getting_started/
+math: mathjax3
 
 ---
 ## Getting started
@@ -24,7 +25,7 @@ permalink: /docs/getting_started/
 
 ### Syntax
 
-A Stan program defines a statistical model through a conditional probability function $ p(\theta|y, x) $. It models: (1) $ \theta $, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $y$, a sequence of known values - including $x$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
+A Stan program defines a statistical model through a conditional probability function $$ p(\theta|y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
 
 #### General
 * Comments in Stan follow a double backslash `\\`.
@@ -75,7 +76,7 @@ or
 
 Notice, `target` is **not** a variable but a global parameter, representing the calculated density of the model's log probability function. It does not need to (but can) be explicitly accessed.
 
-For example, sampling y from a normal distribution with $\mu=0$ and $\sigma=1$.
+For example, sampling y from a normal distribution with $$\mu=0$$ and $$\sigma=1$$.
 * `y ~ normal(0,1);`
 * `target += normal_lpdf(y | 0, 1);`
 
@@ -202,13 +203,13 @@ And
 #### Recap on hierarchical models
 This is a simple normal hierarchical model:
 
-$$ eq 1: x_i \sim N(\mu_i,\sigma_i) $$
+$$eq 1: x_i \sim N(\mu_i,\sigma_i) $$
 $$ eq 2: \mu_i \sim N(\mu_T,\sigma_T) $$
 
-$ x_i $ represents a datapoint for subject $ i $ , distributed normally with matching mean and standard deviation. The mean for each subject is, in turn, distributed normally with group-level mean and standard deviation (indicated with $ T $).
+$$ x_i $$ represents a datapoint for subject $$ i $$ , distributed normally with matching mean and standard deviation. The mean for each subject is, in turn, distributed normally with group-level mean and standard deviation (indicated with $$ T $$).
 
 #### Parameterization
-**A centered parameterization** implies that the subject-level parameters ($ i $) are centered around the group-level parameter ($ T $) as seen in equation 2. This makes sense, but it does not always work.
+**A centered parameterization** implies that the subject-level parameters ($$ i $$) are centered around the group-level parameter ($$ T $$) as seen in equation 2. This makes sense, but it does not always work.
 
 It will work well if their data is in abundance and they are highly heterogeneous. In this case, the group-level sigma will be large, and the posterior distribution space will be smooth. See fig 1, left below.
 
@@ -218,18 +219,18 @@ Why do we care about the posterior distribution geometry? HMC uses global step s
 
 ![posterior space](https://github.com/nivlab/nivstan/blob/docs/assets/img/non-cent.png)
 
-A **non-centered parameterization** aims to resolve this issue by introducing an independent parameter Z (see equation 3 below) and using it to re-expresses the subject level parameters (without using ($ \mu_i $). See equations 4&5.
+A **non-centered parameterization** aims to resolve this issue by introducing an independent parameter Z (see equation 3 below) and using it to re-expresses the subject level parameters (without using ($$ \mu_i $$). See equations 4&5.
 
 $$ eq 3: Z_i \sim N(0,1) $$
 $$ eq 4: \mu_i = \mu_T+Z_i *\sigma_T $$
 $$ eq 5: x_i \sim N(\mu_T+Z_i *\sigma_T,\sigma_i) $$
 
-This group of uncorrelated $ Z_i $ and $ \mu_T $ create a smooth space for the HMC sampler.
+This group of uncorrelated $$ Z_i $$ and $$ \mu_T $$ create a smooth space for the HMC sampler.
 
 #### Parameter transformations in stan
 A common way to represent non-centered parameterization in Stan is via parameter transformation.
 
-$ \mu_i $ is a deterministic transformation of  $ \mu_T $,$ Z_i $, and $ \sigma_T $, thus - it is not being sampled, but calculated.
+$$ \mu_i $$ is a deterministic transformation of  $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
 
 
 ```
