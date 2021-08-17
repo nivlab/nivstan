@@ -4,7 +4,6 @@ title: Getting started
 nav_order: 3
 has_children: false
 permalink: /docs/getting_started/
-math: katex
 
 ---
 ## Getting started
@@ -15,6 +14,7 @@ math: katex
     Table of contents
   </summary>
   {: .text-delta }
+
 1. TOC
 {:toc}
 </details>
@@ -22,7 +22,7 @@ math: katex
 ---
 
 
-### 1. Syntax
+### Syntax
 
 A Stan program defines a statistical model through a conditional probability function $ p(\theta|y, x) $. It models: (1) $ \theta $, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $y$, a sequence of known values - including $x$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
 
@@ -46,7 +46,7 @@ Stan programs feature several distinct parts named blocks:
 
 All of the blocks are optional, but when used - the blocks appear in the above order. Commonly, one uses at least the data, parameters, and model blocks in a basic stan program (see the Bernoulli example).
 
-#### Program flow (based on the block design):
+#### Program flow (based on the block design)
 * Every chain executes the `data{}`, `transformed data{}`, and `parameters{}` blocks. Reads data into memory, validate them, and initializes the parameters values.
 * The multistep **sampling** \* process iteratively evaluating the negative log probability function and its gradient according to the current parameters values. Each step executes the `transformed parameters{}` and the `model{}` blocks. A Metropolis-accept/reject step determines the new parameters’ values.
 * For every accepted sample, Stan executes the `generated quantities{}` block.
@@ -80,7 +80,7 @@ For example, sampling y from a normal distribution with $\mu=0$ and $\sigma=1$.
 * `target += normal_lpdf(y | 0, 1);`
 
 
-### 1.1 Compilation errors
+#### Compilation errors
 
 * If facing a compiler error ("`CompileError: command 'gcc' failed with exit status 1` "), reinstall gcc in conda  `$ conda install -c brown-data-science gcc`.
 
@@ -89,9 +89,9 @@ For example, sampling y from a normal distribution with $\mu=0$ and $\sigma=1$.
 
 
 
-### 2. Compiling & running a stan program:
+### Running a stan program
 
-#### Steps:
+#### Steps
 1. Define the model
 2. Define the data
 3. Compile the model
@@ -104,7 +104,7 @@ Below, in pystan and cmdstanpy, the implementation of these steps for a simple l
 
 #### Pystan
 
-"`python
+```python
 # import libraries
 import pystan
 
@@ -166,13 +166,13 @@ posterior_samples_df = pd.DataFrame(posterior_samples)
 ```
 
 
-### 2.1 Data passing errors
+#### Data passing errors
 
 * Assigning wrong value size into a variable("`SYNTAX ERROR, MESSAGE(S) FROM PARSER: Variable definition base type mismatch` "). Make sure the constraints are defined to match the value assigned.
 
 
 
-### 3. Debugging & diagnostics
+### Debugging & diagnostics
 #### A word on debugging
 Stan provides very informative warnings and errors. Debugging a failed-to-compile model is relatively straightforward (but not always easy). Notice that the error message includes the link and character when it faces the issue.
 
