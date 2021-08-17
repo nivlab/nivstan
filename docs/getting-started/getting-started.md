@@ -4,10 +4,10 @@ title: Getting started
 nav_order: 3
 has_children: false
 permalink: /docs/getting_started/
-math: mathjax3
+math: katex
 
 ---
-## Getting started
+# Getting started
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,11 +23,11 @@ math: mathjax3
 ---
 
 
-### Syntax
+## Syntax
 
 A Stan program defines a statistical model through a conditional probability function $$ p(\theta|y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
 
-#### General
+### General
 * Comments in Stan follow a double backslash `\\`.
 * Every line ends with a semicolon `;`.
 * Stan supports arithmetic and matrix operations on expressions as well as loops & conditions.
@@ -35,7 +35,7 @@ A Stan program defines a statistical model through a conditional probability fun
 
 
 
-#### Program blocks
+### Program blocks
 Stan programs feature several distinct parts named blocks:
 1. `functions{}` contains user-defined functions
 2. `data{}` declares the required data for the model, i.e., the components of the observational space
@@ -47,16 +47,16 @@ Stan programs feature several distinct parts named blocks:
 
 All of the blocks are optional, but when used - the blocks appear in the above order. Commonly, one uses at least the data, parameters, and model blocks in a basic stan program (see the Bernoulli example).
 
-#### Program flow (based on the block design)
+### Program flow (based on the block design)
 * Every chain executes the `data{}`, `transformed data{}`, and `parameters{}` blocks. Reads data into memory, validate them, and initializes the parameters values.
-* The multistep **sampling** \* process iteratively evaluating the negative log probability function and its gradient according to the current parameters values. Each step executes the `transformed parameters{}` and the `model{}` blocks. A Metropolis-accept/reject step determines the new parameters’ values.
+* The multistep sampling \* process iteratively evaluating the negative log probability function and its gradient according to the current parameters values. Each step executes the `transformed parameters{}` and the `model{}` blocks. A Metropolis-accept/reject step determines the new parameters’ values.
 * For every accepted sample, Stan executes the `generated quantities{}` block.
 
 
 \* Pay attention, the description above (and the whole guide) focuses on Stan's sampling functionality. Importantly, Stan also offers optimization and variational inference functionalities.
 
 
-#### Variable declaration
+### Variable declaration
 You have to declare every variable, including its type and shape. Following the structure:
 `var_type variable ?dims ?('=' expression);`
 
@@ -67,7 +67,7 @@ Some examples:
 
 See all of Stan's data types [here](https://mc-stan.org/docs/2_27/reference-manual/overview-of-data-types.html).
 
-#### Sampling statements
+### Sampling statements
 
 Defining a sampling statement can be done in one of two ways:
 1. In sampling notation, following `var_name ~ probability_function (parameters);`
@@ -81,7 +81,7 @@ For example, sampling y from a normal distribution with $$\mu=0$$ and $$\sigma=1
 * `target += normal_lpdf(y | 0, 1);`
 
 
-#### Compilation errors
+### Compilation errors
 
 * If facing a compiler error ("`CompileError: command 'gcc' failed with exit status 1` "), reinstall gcc in conda  `$ conda install -c brown-data-science gcc`.
 
@@ -90,9 +90,9 @@ For example, sampling y from a normal distribution with $$\mu=0$$ and $$\sigma=1
 
 
 
-### Running a stan program
+## Running a Stan program
 
-#### Steps
+### Steps
 1. Define the model
 2. Define the data
 3. Compile the model
@@ -103,7 +103,7 @@ For example, sampling y from a normal distribution with $$\mu=0$$ and $$\sigma=1
 Below, in pystan and cmdstanpy, the implementation of these steps for a simple linear regression model. Find the stan file [here](https://gist.github.com/karnigili/75757f2c52fc8273b9e0a670259a0417)
 
 
-#### Pystan
+### Pystan
 
 ```python
 # import libraries
@@ -137,7 +137,7 @@ new_quantities = model.generate_quantities(data=model_data, mcmc_sample=model_fi
 new_quantities_df = model.generated_quantities_pd(data=model_data, mcmc_sample=model_fit)
 ```
 
-#### CmdStanPy
+### CmdStanPy
 
 ```python
 # import libraries
@@ -167,19 +167,19 @@ posterior_samples_df = pd.DataFrame(posterior_samples)
 ```
 
 
-#### Data passing errors
+### Data passing errors
 
 * Assigning wrong value size into a variable("`SYNTAX ERROR, MESSAGE(S) FROM PARSER: Variable definition base type mismatch` "). Make sure the constraints are defined to match the value assigned.
 
 
 
-### Debugging & diagnostics
-#### A word on debugging
+## Debugging & diagnostics
+### A word on debugging
 Stan provides very informative warnings and errors. Debugging a failed-to-compile model is relatively straightforward (but not always easy). Notice that the error message includes the link and character when it faces the issue.
 
 See 1.1 and 2.1 for some warning examples.
 
-#### Diagnosis
+### Diagnosis
 Diagnosis deals with cases where the program finishes running, but there are validity issues with the sampler's outcome. There is no easy troubleshooting, as these usually indicate some fundamental problem with the model itself.
 
 Most important/common:
@@ -198,9 +198,9 @@ And
 
 [Some more about stan warnings](https://mc-stan.org/misc/warnings.html).
 
-### Parameterization tricks
+## Parameterization tricks
 
-#### Recap on hierarchical models
+### Recap on hierarchical models
 This is a simple normal hierarchical model:
 
 $$eq 1: x_i \sim N(\mu_i,\sigma_i) $$
@@ -208,7 +208,7 @@ $$ eq 2: \mu_i \sim N(\mu_T,\sigma_T) $$
 
 $$ x_i $$ represents a datapoint for subject $$ i $$ , distributed normally with matching mean and standard deviation. The mean for each subject is, in turn, distributed normally with group-level mean and standard deviation (indicated with $$ T $$).
 
-#### Parameterization
+### Parameterization
 **A centered parameterization** implies that the subject-level parameters ($$ i $$) are centered around the group-level parameter ($$ T $$) as seen in equation 2. This makes sense, but it does not always work.
 
 It will work well if their data is in abundance and they are highly heterogeneous. In this case, the group-level sigma will be large, and the posterior distribution space will be smooth. See fig 1, left below.
@@ -227,7 +227,7 @@ $$ eq 5: x_i \sim N(\mu_T+Z_i *\sigma_T,\sigma_i) $$
 
 This group of uncorrelated $$ Z_i $$ and $$ \mu_T $$ create a smooth space for the HMC sampler.
 
-#### Parameter transformations in stan
+### Parameter transformations in stan
 A common way to represent non-centered parameterization in Stan is via parameter transformation.
 
 $$ \mu_i $$ is a deterministic transformation of  $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
