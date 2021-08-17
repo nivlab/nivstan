@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Resources
-nav_order: 4
+nav_order: 5
 has_children: false
 permalink: /docs/resources
 ---
@@ -10,7 +10,7 @@ permalink: /docs/resources
 
 ## General resources
 
-- 
+-
 
 - `Stan reference manual: <http://mc-stan.org/users/documentation/>`_ the Bible of the Stan modelling language. There is a 90% probability it has a solution to your problem (if only you could find where).
 - `Stan forums: <https://discourse.mc-stan.org/>`_ the official Stan discourse. Active and friendly community with relatively fast response times.
