@@ -1,13 +1,12 @@
 ---
 layout: default
-title: Installing
-parent: Getting started
+title: Install
+permalink: /install/
 nav_order: 1
 ---
 
 ## Installing Stan (in Python)
 
-#### Stan’s (python) interfaces
 The common python stan interfaces are [pystan](https://pystan.readthedocs.io/en/latest/) or [cmdstanpy](https://cmdstanpy.readthedocs.io/en/stable-0.9.65/getting_started.html) which offer slightly different architectural designs & APIs.
 
 This guide assumes you are using anaconda to manage your python.
