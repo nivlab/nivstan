@@ -4,6 +4,7 @@ title: Install
 permalink: /docs/install/
 nav_order: 2
 has_children: false
+
 ---
 
 ## Installing Stan (in Python)
