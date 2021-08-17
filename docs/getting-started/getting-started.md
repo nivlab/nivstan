@@ -4,9 +4,23 @@ title: Getting started
 nav_order: 3
 has_children: false
 permalink: /docs/getting_started/
+math: katex
+
+---
+## Getting started
+{: .no_toc }
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
 ---
 
-## Getting started
 
 ### 1. Syntax
 
@@ -202,7 +216,7 @@ However, if the data are small, the group-level variance will be small, creating
 
 Why do we care about the posterior distribution geometry? HMC uses global step size independent of location in parameter space. Thus, a smooth geometry allows sampling accurately from the space, while a sharp geometry will probably lead to divergence or biased estimation of the group sigma.
 
-![posterior space](../assets/img/non-cent.png)
+![posterior space](https://github.com/nivlab/nivstan/blob/docs/assets/img/non-cent.png)
 
 A **non-centered parameterization** aims to resolve this issue by introducing an independent parameter Z (see equation 3 below) and using it to re-expresses the subject level parameters (without using ($ \mu_i $). See equations 4&5.
 
