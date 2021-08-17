@@ -4,7 +4,6 @@ title: Getting started
 nav_order: 3
 has_children: false
 permalink: /docs/getting_started/
-math: katex
 
 ---
 ## Getting started
