@@ -7,3 +7,5 @@ permalink: /docs/getting_started
 ---
 
 # Getting started
+
+{: .fs-6 .fw-300 }

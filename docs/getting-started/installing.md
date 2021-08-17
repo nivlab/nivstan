@@ -1,3 +1,10 @@
+---
+layout: default
+title: Installing
+parent: Getting started
+nav_order: 1
+---
+
 ## Installing Stan (in Python)
 
 #### Stan’s (python) interfaces
