@@ -88,4 +88,4 @@ model = CmdStanModel(stan_file=model_code)
 
 Expect to see a lot of output, but no failure codes. Got it? Amazing, you are all set up. Let’s dive into it:)
 
-If you are facing compiling error, please refer to the [compilation error section](https://nivlab.github.io/nivstan/getting_started/#11-compilation-errors) of this tutorial.
+If you are facing compiling error, please refer to the [compilation error section](https://nivlab.github.io/nivstan/docs/getting_started/#compilation-errors) of this tutorial.
