@@ -35,7 +35,7 @@ MCMC (Markov chain Monte Carlo) is a group of sampling methods, generating stoch
 0. Define a proposal distribution $$ q(x, x_t) $$ and a length scale parameter (epsilon).
 1. Pick an initial state $$ x_0 $$
 2. Iteratively:
-  a. Draw a sample $x^\*$ from the proposal distribution.
+  a. Draw a sample $$ x^\star $$ from the proposal distribution.
   b. Calculate acceptance, if accepted $$x_{t+1}=x^\*$$, otherwise $$x_{t+1}=x_t$$
 
 #### A quick demonstration of simple MCMC
@@ -50,7 +50,7 @@ A more in-depth explanation of Bayesian Inference with Hamiltonian Monte Carlo i
 
 ## Syntax
 
-A Stan program defines a statistical model through a conditional probability function $$ p(\theta|y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
+A Stan program defines a statistical model through a conditional probability function $$ p(\theta \given y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
 
 ### General
 * Comments in Stan follow a double backslash `\\`.
