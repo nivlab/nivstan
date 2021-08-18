@@ -1,0 +1,80 @@
+{%- comment -%}
+  MathJax: See https://docs.mathjax.org/en/v2.7-latest/start.html
+
+  For loading and configuration to use version 3, see:
+  https://docs.mathjax.org/en/latest/web/configuration.html
+{%- endcomment -%}
+
+{% case page.math %}
+
+  {% when "katex" %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13/dist/katex.min.css" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13/dist/katex.min.js" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      globalGroup: true,
+      trust: true,
+      strict: false,
+      throwOnError: false,
+      macros: {
+        '\\\n': '\\ '
+      }
+    });"></script>
+
+    <!-- Override the KaTeX default of font-size: 1.21em -->
+    <style>
+      .katex {
+        font-size: 1em;
+      }
+    </style>
+
+    <!-- Potential workaround for KaTeX 0.13 bug https://github.com/KaTeX/KaTeX/issues/2815 -->
+    <style>
+      .katex .vlist-t2 > .vlist-r:nth-child(2) > .vlist {
+        pointer-events: none;
+    }
+    </style>
+
+  {% when "mathjax2" %}
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_SVG">
+    </script>
+
+  {% when "mathjax3" %}
+
+    <script>
+      MathJax = {
+        tex: {
+          tags: 'ams',
+          packages: {'[+]': ['textmacros']},
+        },
+        loader: {
+          load: ['[tex]/textmacros']
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+{% endcase %}
+
+{%- comment -%}
+  Favicon: See https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests
+{%- endcomment -%}
+
+<link rel="icon" href="data:,">

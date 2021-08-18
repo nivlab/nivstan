@@ -22,6 +22,31 @@ math: katex
 
 ---
 
+## MCMC Recap
+
+In Bayesian inference, one commonly aims to compute a posterior using a prior and likelihood. However, the exact value of the posterior probability is often intractable. Nonetheless, it is possible to construct an approximation via sampling.
+
+MCMC (Markov chain Monte Carlo) is a group of sampling methods, generating stochastic Markovian draws from an unknown (posterior) distribution.   
+
+### Algorithm
+
+
+#### steps
+0. Define a proposal distribution $$ q(x, x_t) $$ and a length scale parameter (epsilon).
+1. Pick an initial state $$ x_0 $$
+2. Iteratively:
+  a. Draw a sample $x^\*$ from the proposal distribution.
+  b. Calculate acceptance, if accepted $$x_{t+1}=x^\*$$, otherwise $$x_{t+1}=x_t$$
+
+#### A quick demonstration of simple MCMC
+
+Embed the [notebook](https://colab.research.google.com/gist/karnigili/9f32eaa854cc321b399313c7c44ececb/hmc_example.ipynb)
+
+#### Stan's MCMC
+
+TBD
+
+A more in-depth explanation of Bayesian Inference with Hamiltonian Monte Carlo in [this](https://www.youtube.com/watch?v=jUSZboSq1zg) video, reviewing [this](https://arxiv.org/pdf/1701.02434.pdf) paper.
 
 ## Syntax
 
@@ -217,7 +242,7 @@ However, if the data are small, the group-level variance will be small, creating
 
 Why do we care about the posterior distribution geometry? HMC uses global step size independent of location in parameter space. Thus, a smooth geometry allows sampling accurately from the space, while a sharp geometry will probably lead to divergence or biased estimation of the group sigma.
 
-![posterior space](https://github.com/nivlab/nivstan/blob/docs/assets/img/non-cent.png)
+![posterior space](https://raw.githubusercontent.com/nivlab/nivstan/docs/assets/img/non-cent.png)
 
 A **non-centered parameterization** aims to resolve this issue by introducing an independent parameter Z (see equation 3 below) and using it to re-expresses the subject level parameters (without using ($$ \mu_i $$). See equations 4&5.
 
@@ -230,7 +255,8 @@ This group of uncorrelated $$ Z_i $$ and $$ \mu_T $$ create a smooth space for t
 ### Parameter transformations in stan
 A common way to represent non-centered parameterization in Stan is via parameter transformation.
 
-$$ \mu_i $$ is a deterministic transformation of  $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
+$$ \mu_i $$, as defined in equation 4, is a deterministic transformation of  $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
+
 
 
 ```
