@@ -45,7 +45,7 @@ MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating st
 
   <iframe
     src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard"
-     width="700">
+     style=""width:100%; zoom: 0.5;">
   </iframe>
 
 
@@ -273,16 +273,17 @@ $$ eq 5: x_i \sim N(\mu_T+Z_i *\sigma_T,\sigma_i) $$
 
 This group of uncorrelated $$ Z_i $$ and $$ \mu_T $$ create a smooth space for the HMC sampler.
 
+Check out [this blog](https://www.occasionaldivergences.com/) & [this video](https://www.youtube.com/watch?v=gSd1msFFZTw) for additional review on this topic.
+
 ### Parameter transformations in stan
 A common way to represent non-centered parameterization in Stan is via parameter transformation.
 
 $$ \mu_i $$, as defined in equation 4, is a deterministic transformation of $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
 
-TBD
+Using a fast approximation of the unit normal cumulative distribution, we ensure
+1. Keeping all of the pre-transform parameters in approximately the same space (e.g., all sampled from a standard normal distribution) . This helps Stan with its gradient calculations -- thereby speeding up the program.
+2. Bounding the pre-transform parameters into the range required by learning rates (or other parameters used), i.e. [0,1]. We can always scale a [0,1] bound parameter by multiplying/adding any value to it.
 
 ```
 mu_i = Phi_approx(mu_T + sigma_T * Z_i);
 ```
-
-
-Check out [this blog](https://www.occasionaldivergences.com/) & [this video](https://www.youtube.com/watch?v=gSd1msFFZTw) for additional review on this topic.
