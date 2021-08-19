@@ -40,10 +40,14 @@ MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating st
 1. Pick an initial state $$ x_0 $$
 2. Iteratively:
   a. Draw a sample $$ x^\star $$ from the proposal distribution.
-  b. Calculate an acceptance probability (a simple one would be $$ \min_{\frac{q(x^\star)}{q(x_t)}, 1} $$).
+  b. Calculate an acceptance probability (a simple one would be $$ \min (\frac{q(x^\star)}{q(x_t)}, 1) $$).
   c. update the state, if sample accepted $$x_{t+1}=x^\star$$, otherwise $$x_{t+1}=x_t$$
 
-![An illustration of a simple MCMC by Chi Feng](https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard)
+  <iframe
+    src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard">
+  </iframe>
+
+
 
 A simple MCMC (i.e., the Metropolis-Hastings algorithm) explores the space by moving through spaces of relatively high probability. In high dimensional spaces (where spaces of very low probability are common), MH would perform poorly, or at least, very inefficiently.
 
@@ -66,7 +70,7 @@ In addition to performing full Bayesian inference via posterior sampling, Stan a
 
 ## Syntax
 
-A Stan program defines a statistical model through a conditional probability function $$ p(\theta | y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
+A Stan program defines a statistical model through a conditional probability function $$ p(\theta \| y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
 
 ### General
 * Comments in Stan follow a double backslash `\\`.
