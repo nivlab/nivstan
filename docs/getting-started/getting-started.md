@@ -26,31 +26,47 @@ math: katex
 
 In Bayesian inference, one commonly aims to compute a posterior using a prior and likelihood. However, the exact value of the posterior probability is often intractable. Nonetheless, it is possible to construct an approximation via sampling.
 
-MCMC (Markov chain Monte Carlo) is a group of sampling methods, generating stochastic Markovian draws from an unknown (posterior) distribution.   
+MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating stochastic Markovian draws from an unknown (posterior) distribution.   
+
+
+1. Find a short, intuitive explanation in [this](https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/) blog post.
+
+2. Or a more in-depth explanation of Bayesian Inference with Hamiltonian Monte Carlo in [this](https://www.youtube.com/watch?v=jUSZboSq1zg) video, reviewing [this](https://arxiv.org/pdf/1701.02434.pdf) paper.
 
 ### Algorithm
 
-
-#### steps
+#### General steps
 0. Define a proposal distribution $$ q(x, x_t) $$ and a length scale parameter (epsilon).
 1. Pick an initial state $$ x_0 $$
 2. Iteratively:
   a. Draw a sample $$ x^\star $$ from the proposal distribution.
-  b. Calculate acceptance, if accepted $$x_{t+1}=x^\*$$, otherwise $$x_{t+1}=x_t$$
+  b. Calculate an acceptance probability (a simple one would be $$ \min_{\frac{q(x^\star)}{q(x_t)}, 1} $$).
+  c. update the state, if sample accepted $$x_{t+1}=x^\star$$, otherwise $$x_{t+1}=x_t$$
 
-#### A quick demonstration of simple MCMC
+![An illustration of a simple MCMC by Chi Feng](https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard)
 
-Embed the [notebook](https://colab.research.google.com/gist/karnigili/9f32eaa854cc321b399313c7c44ececb/hmc_example.ipynb)
+A simple MCMC (i.e., the Metropolis-Hastings algorithm) explores the space by moving through spaces of relatively high probability. In high dimensional spaces (where spaces of very low probability are common), MH would perform poorly, or at least, very inefficiently.
+
+
+Comes HMC..
+
 
 #### Stan's MCMC
+The Hamiltonian Monte Carlo (HMC) algorithm offers a better solution for high dimensions. HMC introduces an auxiliary variable ($$ y $$) which, via motion equations borrowed from Newtonian mechanics, allows exploring a multidimensional space more efficiently. The main problem is solving the Hamiltonian equations efficiently. HMC uses 3 parameters (read more [here](https://mc-stan.org/docs/2_18/reference-manual/hmc-algorithm-parameters.html)), which Stan automatically optimizes based on warmup sample iterations or dynamically adapts using the no-U-turn sampling (NUTS) algorithm. (Nicely eliminating the need for user-specified tuning parameters).
 
-TBD
 
-A more in-depth explanation of Bayesian Inference with Hamiltonian Monte Carlo in [this](https://www.youtube.com/watch?v=jUSZboSq1zg) video, reviewing [this](https://arxiv.org/pdf/1701.02434.pdf) paper.
+Pay attention, Hamiltonian algorithms still have limitations.
+1. HMC requires continuous parameter spaces (i.e., no discrete parameters).
+2. Multimodal targets, among other weirdly shaped distributions, are often problematic to sample from.
+
+
+#### More than sampling
+In addition to performing full Bayesian inference via posterior sampling, Stan also can perform optimization & Variational inference. But we won't get into it here...
+
 
 ## Syntax
 
-A Stan program defines a statistical model through a conditional probability function $$ p(\theta \given y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
+A Stan program defines a statistical model through a conditional probability function $$ p(\theta | y, x) $$. It models: (1) $$ \theta $$, a sequence of unknown values (e.g., model parameters, latent variables, missing data, future predictions) and (2) $$y$$, a sequence of known values - including $$x$$, a sequence of predictors and constants (e.g., sizes, hyperparameters).
 
 ### General
 * Comments in Stan follow a double backslash `\\`.
@@ -70,7 +86,7 @@ Stan programs feature several distinct parts named blocks:
 6. `model{}` defines the log probability function
 7. `generated quantities{}` derives user-defined quantities based on the data and sampled parameters
 
-All of the blocks are optional, but when used - the blocks appear in the above order. Commonly, one uses at least the data, parameters, and model blocks in a basic stan program (see the Bernoulli example).
+All of the blocks are optional, but when used - the blocks appear in the above order. Commonly, one uses at least the data, parameters, and model blocks in a basic Stan program (see the Bernoulli example).
 
 ### Program flow (based on the block design)
 * Every chain executes the `data{}`, `transformed data{}`, and `parameters{}` blocks. Reads data into memory, validate them, and initializes the parameters values.
@@ -255,9 +271,9 @@ This group of uncorrelated $$ Z_i $$ and $$ \mu_T $$ create a smooth space for t
 ### Parameter transformations in stan
 A common way to represent non-centered parameterization in Stan is via parameter transformation.
 
-$$ \mu_i $$, as defined in equation 4, is a deterministic transformation of  $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
+$$ \mu_i $$, as defined in equation 4, is a deterministic transformation of $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
 
-
+TBD
 
 ```
 mu_i = Phi_approx(mu_T + sigma_T * Z_i);
