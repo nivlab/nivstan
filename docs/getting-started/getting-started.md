@@ -40,12 +40,12 @@ MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating st
 1. Pick an initial state $$ x_0 $$
 2. Iteratively:
   a. Draw a sample $$ x^\star $$ from the proposal distribution.
-  b. Calculate an acceptance probability (a simple one would be $$ \min (\frac{q(x^\star)}{q(x_t)}, 1) $$).
+  b. Calculate an acceptance probability (a simple one would be $$ p = \min (\frac{q(x^\star)}{q(x_t)}, 1) $$).
   c. update the state, if sample accepted $$x_{t+1}=x^\star$$, otherwise $$x_{t+1}=x_t$$
 
   <iframe
     src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard"
-     style=""width:100%; zoom: 0.5;">
+     style="width:100%; zoom: 0.5;">
   </iframe>
 
 
@@ -249,8 +249,9 @@ And
 ### Recap on hierarchical models
 This is a simple normal hierarchical model:
 
-$$eq 1: x_i \sim N(\mu_i,\sigma_i) $$
-$$ eq 2: \mu_i \sim N(\mu_T,\sigma_T) $$
+1. $$ eq 1: x_i \sim N(\mu_i,\sigma_i) $$
+
+2. $$ eq 2: \mu_i \sim N(\mu_T,\sigma_T) $$
 
 $$ x_i $$ represents a datapoint for subject $$ i $$ , distributed normally with matching mean and standard deviation. The mean for each subject is, in turn, distributed normally with group-level mean and standard deviation (indicated with $$ T $$).
 
@@ -267,9 +268,9 @@ Why do we care about the posterior distribution geometry? HMC uses global step s
 
 A **non-centered parameterization** aims to resolve this issue by introducing an independent parameter Z (see equation 3 below) and using it to re-expresses the subject level parameters (without using ($$ \mu_i $$). See equations 4&5.
 
-$$ eq 3: Z_i \sim N(0,1) $$
-$$ eq 4: \mu_i = \mu_T+Z_i *\sigma_T $$
-$$ eq 5: x_i \sim N(\mu_T+Z_i *\sigma_T,\sigma_i) $$
+3. $$ eq 3: Z_i \sim N(0,1) $$
+4. $$ eq 4: \mu_i = \mu_T+Z_i *\sigma_T $$
+5. $$ eq 5: x_i \sim N(\mu_T+Z_i *\sigma_T,\sigma_i) $$
 
 This group of uncorrelated $$ Z_i $$ and $$ \mu_T $$ create a smooth space for the HMC sampler.
 
@@ -280,7 +281,7 @@ A common way to represent non-centered parameterization in Stan is via parameter
 
 $$ \mu_i $$, as defined in equation 4, is a deterministic transformation of $$ \mu_T $$,$$ Z_i $$, and $$ \sigma_T $$, thus - it is not being sampled, but calculated.
 
-Using a fast approximation of the unit normal cumulative distribution, we ensure
+Using a fast approximation of the unit normal cumulative distribution, we:
 1. Keeping all of the pre-transform parameters in approximately the same space (e.g., all sampled from a standard normal distribution) . This helps Stan with its gradient calculations -- thereby speeding up the program.
 2. Bounding the pre-transform parameters into the range required by learning rates (or other parameters used), i.e. [0,1]. We can always scale a [0,1] bound parameter by multiplying/adding any value to it.
 
