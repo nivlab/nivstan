@@ -44,7 +44,8 @@ MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating st
   c. update the state, if sample accepted $$x_{t+1}=x^\star$$, otherwise $$x_{t+1}=x_t$$
 
   <iframe
-    src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard">
+    src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard"
+     width="700">
   </iframe>
 
 
