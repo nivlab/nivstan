@@ -29,4 +29,4 @@ permalink: /docs/resources
 ## Bayesian Inference and more foundational knowledge
 - More of [Michael Betancourt's blog](https://betanalpha.github.io/writing/): lots of useful posts from intro to probability theory, to modelling, and some others..
 - [An Introduction To Bayesian Inference (II): Inference Of Parameters And Models](https://www.youtube.com/watch?v=mDVE0M-xQlc): a recorded lecture by David MacKay.
-- [Statistical-rethinking] (https://github.com/Booleans/statistical-rethinking/blob/master/Statistical%20Rethinking%202nd%20Edition.pdf): a Bayesian Statistics book with examples in Stan.
+- [Statistical-rethinking](https://github.com/Booleans/statistical-rethinking/blob/master/Statistical%20Rethinking%202nd%20Edition.pdf): a Bayesian Statistics book with examples in Stan.
