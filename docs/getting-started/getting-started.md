@@ -223,8 +223,6 @@ posterior_samples_df = pd.DataFrame(posterior_samples)
 ### A word on debugging
 Stan provides very informative warnings and errors. Debugging a failed-to-compile model is relatively straightforward (but not always easy). Notice that the error message includes the link and character when it faces the issue.
 
-See 1.1 and 2.1 for some warning examples.
-
 ### Diagnosis
 Diagnosis deals with cases where the program finishes running, but there are validity issues with the sampler's outcome. There is no easy troubleshooting, as these usually indicate some fundamental problem with the model itself.
 
