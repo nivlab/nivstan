@@ -53,6 +53,7 @@ Technically, you can install cmdstanpy first and call the install_cmdstan utilit
 
 
 ## Module-based
+\* PNI-specific
 1. Load anaconda ```$ module load anacondapy/5.3.1```
 2. Activate your designated stan environment.
 
@@ -62,7 +63,7 @@ Technically, you can install cmdstanpy first and call the install_cmdstan utilit
 ### CmdStanPy
 * Load cmdstanpy ```$ module load cmdstan/2.26.1```
 
-See the full CmdStanPy instructions from IT [here](https://gist.github.com/karnigili/c5519b3b62ab494dedf5a0a5a4aebdeb).
+See the full CmdStanPy instructions from PNI/IT [here](https://gist.github.com/karnigili/c5519b3b62ab494dedf5a0a5a4aebdeb).
 
 
 ## Let's check it is working
