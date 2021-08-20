@@ -45,7 +45,7 @@ MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating st
 
   <iframe
     src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard"
-     style="width:100%; height:20%; zoom: 0.5;">
+     style="width:100%; height:50%; zoom: 0.5;">
   </iframe>
 
 
