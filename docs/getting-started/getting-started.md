@@ -45,7 +45,7 @@ MCMC (Markov chain Monte Carlo) is a group of sampling algorithms, generating st
 
   <iframe
     src="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=standard"
-     style="width:100%; zoom: 0.5;">
+     style="width:100%; height:20%; zoom: 0.5;">
   </iframe>
 
 
@@ -57,7 +57,7 @@ Comes HMC..
 
 
 #### Stan's MCMC
-The Hamiltonian Monte Carlo (HMC) algorithm offers a better solution for high dimensions. HMC introduces an auxiliary variable ($$ y $$) which, via motion equations borrowed from Newtonian mechanics, allows exploring a multidimensional space more efficiently. The main problem is solving the Hamiltonian equations efficiently. HMC uses 3 parameters (read more [here](https://mc-stan.org/docs/2_18/reference-manual/hmc-algorithm-parameters.html)), which Stan automatically optimizes based on warmup sample iterations or dynamically adapts using the no-U-turn sampling (NUTS) algorithm. (Nicely eliminating the need for user-specified tuning parameters).
+The Hamiltonian Monte Carlo (HMC) algorithm offers a better solution for high dimensions. HMC introduces an auxiliary variable ($$ y $$) which, via motion equations borrowed from Newtonian mechanics, allows exploring a multidimensional space more efficiently. The main problem is solving the Hamiltonian equations efficiently. HMC uses 3 parameters (read more [here](https://mc-stan.org/docs/2_18/reference-manual/hmc-algorithm-parameters.html)), which Stan automatically optimizes based on warmup sample iterations or dynamically adapts using the no-U-turn sampling (NUTS) algorithm. **Nicely eliminating the need for user-specified tuning parameters.**
 
 
 Pay attention, Hamiltonian algorithms still have limitations.
