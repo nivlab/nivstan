@@ -47,6 +47,8 @@ exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "pac
 # Supports true (default) or false
 search_enabled: true
 
+color_scheme: nivlab
+
 # Footer content
 # appears at the bottom of every page's main content
 
