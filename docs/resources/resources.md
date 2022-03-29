@@ -17,13 +17,13 @@ permalink: /docs/resources
 - [Stan example models](https://github.com/stan-dev/example-models): a veritable treasure trove of prewritten Stan models across a wide array of statistical problems.
 - [ShinyStan](http://mc-stan.org/users/interfaces/shinystan): helpful visualization tools compatible with RStan.
 - [ArviZ](https://github.com/arviz-devs/arviz): helpful visualization tools compatible with PyStan.
-- [hBayesDM](https://github.com/CCS-Lab/hBayesDM): user-friendly R package that offers hierarchical Bayesian analysis of various computational cognitive models for many decision-making tasks.
 - [An Introduction to Stan](https://betanalpha.github.io/assets/case_studies/stan_intro.html#1_prologue) by Michael Betancourt.
 
 
 ## Stan for cognitive science
 
 - [Stan for cognitive science](https://cognitive-science-stan.github.io/): aims to centralize all types of work in cognitive science that use the software Stan. Has some useful tutorials and links to papers using Stan.
+ - [Book (in progress): An Introduction to Bayesian Data Analysis for Cognitive Science, CRC Press](https://vasishth.github.io/bayescogsci/)
 
 
 ## Bayesian Inference and more foundational knowledge
