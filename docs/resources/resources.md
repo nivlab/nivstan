@@ -24,6 +24,7 @@ permalink: /docs/resources
 
 - [Stan for cognitive science](https://cognitive-science-stan.github.io/): aims to centralize all types of work in cognitive science that use the software Stan. Has some useful tutorials and links to papers using Stan.
  - [Book (in progress): An Introduction to Bayesian Data Analysis for Cognitive Science, CRC Press](https://vasishth.github.io/bayescogsci/)
+ - [rlssm](https://rlssm.readthedocs.io/en/latest/): a Python package by Laura Fontanesi for fitting reinforcement learning (RL) models, sequential sampling models (DDM, RDM, LBA, ALBA,    and ARDM), and combinations of the two, using Bayesian parameter estimation.
 
 
 ## Bayesian Inference and more foundational knowledge
